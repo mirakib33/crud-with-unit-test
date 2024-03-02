@@ -2,7 +2,6 @@ package com.misoft.crud.controller;
 
 import com.misoft.crud.DTO.EmployeeDTO;
 import com.misoft.crud.constants.EmployeeConstants;
-import com.misoft.crud.model.Employee;
 import com.misoft.crud.service.EmployeeService;
 import com.misoft.crud.utills.EmployeeUtils;
 import lombok.extern.slf4j.Slf4j;
