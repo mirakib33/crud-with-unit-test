@@ -1,0 +1,66 @@
+<div class="form-center">
+  <mat-card>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="employeeForm.get('name')?.hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Department</mat-label>
+          <input matInput type="text" formControlName="department">
+          <mat-error *ngIf="employeeForm.get('department')?.hasError('required')">
+            Department is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput type="text" formControlName="city">
+          <mat-error *ngIf="employeeForm.get('city')?.hasError('required')">
+            City is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>  
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput type="tel" formControlName="phone">
+          <mat-error *ngIf="employeeForm.get('phone')?.hasError('required')">
+            Phone is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+            Invalid email format
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="button-center" style="margin-bottom: 10px;">
+        <button mat-raised-button color="primary" type="submit">Save</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>
