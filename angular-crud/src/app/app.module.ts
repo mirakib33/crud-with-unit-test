@@ -7,6 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,14 +17,18 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ViewEmployeeComponent } from './components/view-employee/view-employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     HomeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    ToolbarComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     MatInputModule,
     MatCardModule,
     MatPaginatorModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

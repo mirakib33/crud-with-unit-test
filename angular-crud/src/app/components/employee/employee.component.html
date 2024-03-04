@@ -1,7 +1,10 @@
+<app-toolbar></app-toolbar>
+
+
 <div class="form-center">
   <mat-card>
 
-    <form [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
+    <form [formGroup]="employeeForm">
 
       <div>
         <mat-form-field appearance="fill">
@@ -36,7 +39,7 @@
       <div>  
         <mat-form-field appearance="fill">
           <mat-label>Phone</mat-label>
-          <input matInput type="tel" formControlName="phone">
+          <input matInput type="number" formControlName="phone">
           <mat-error *ngIf="employeeForm.get('phone')?.hasError('required')">
             Phone is required
           </mat-error>
@@ -56,9 +59,15 @@
         </mat-form-field>
       </div>
 
-      <div class="button-center" style="margin-bottom: 10px;">
-        <button mat-raised-button color="primary" type="submit">Save</button>
-      </div>
+      <span *ngIf="!update">
+        <button mat-raised-button color="primary" type="submit" (click)="createEmployee()">Save</button>
+      </span>
+      <span *ngIf="update">
+        <button mat-raised-button color="primary" type="submit" (click)="updateEmployee()">Update</button>
+      </span>
+      <span>
+        <button mat-raised-button color="accent" type="submit" (click)="onReset()">Reset</button>
+      </span>
 
     </form>
 

@@ -1,10 +1,14 @@
+<app-toolbar></app-toolbar>
+
 <p>{{errorMessage}}</p>
 
 <div style="margin: 20px; text-align: center;">
     <h2>Employee List</h2>
 </div>
 
-<div class="mat-elevation-z8">
+
+
+<div class="mat-elevation-z8" style="margin: 25px;">
     <table mat-table [dataSource]="employees">
 
       <ng-container matColumnDef="serial">
@@ -35,6 +39,14 @@
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button style="margin: 1px; background-color: yellowgreen; color: aliceblue; border: none;" (click)="onEdit(element.id)">Edit</button>
+          <button style="margin: 1px; background-color: tomato; color: aliceblue; border: none;" (click)="onDelete(element.id)">Delete</button>
+        </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

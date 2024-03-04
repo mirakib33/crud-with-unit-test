@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/model/employee.model';
 import { EmployeeService } from 'src/app/service/employee.service';
 
@@ -14,11 +14,14 @@ export class EmployeeComponent implements OnInit{
   employeeForm!: FormGroup;
   employees!: any[];
   errorMessage!: string;
+  update: boolean = false;
+  id: any;
 
   constructor(
     private employeeService: EmployeeService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) { 
       this.employeeForm = this.fb.group({
         name: ['', [Validators.required]],
@@ -30,15 +33,30 @@ export class EmployeeComponent implements OnInit{
     }
 
   ngOnInit(): void {
-    // this.getAllEmployees();
+    this.id = this.route.snapshot.paramMap.get('id');
+    if(this.id !=null) {
+      this.getEmployeeById(this.id);
+      this.update = true;
+    }
 
   }
 
+  onReset() {
+    this.router.navigate(['/employee']);
+    this.update = false;
+    this.employeeForm = this.fb.group({
+      name: [''],
+      department: [''],
+      city: [''],
+      phone: [''],
+      email: [''],
+    });
+  }
  
 
   getEmployeeById(id: string): void {
     this.employeeService.getEmployeeById(id).subscribe((response: any) => {
-          // Handle the response
+      this.employeeForm.patchValue(response);
         },
         (error: any) => {
           this.errorMessage = error;
@@ -53,6 +71,7 @@ export class EmployeeComponent implements OnInit{
     }
     this.employeeService.createEmployee(this.employeeForm.value).subscribe((response: any) => {
       alert(response.message);
+      this.router.navigate(['/employeeList']);
         },
         (error: any) => {
           this.errorMessage = error;
@@ -60,19 +79,10 @@ export class EmployeeComponent implements OnInit{
       );
   }
 
-  updateEmployee(id: string, employee: Employee): void {
-    this.employeeService.updateEmployee(id, employee).subscribe((response: any) => {
-          // Handle the response
-        },
-        (error: any) => {
-          this.errorMessage = error;
-        }
-      );
-  }
-
-  deleteEmployee(id: string): void {
-    this.employeeService.deleteEmployee(id).subscribe((response: any) => {
-          // Handle the response
+  updateEmployee(): void {
+    this.employeeService.updateEmployee(this.id, this.employeeForm.value).subscribe((response: any) => {
+          alert(response.message);
+          this.router.navigate(['/employeeList']);
         },
         (error: any) => {
           this.errorMessage = error;

@@ -5,8 +5,6 @@
     min-height: 100vh; /* Optional: Set minimum height for centering */
   }
 
-.button-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+button {
+    margin: 5px;
   }
