@@ -19,10 +19,6 @@ export class EmployeeListComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
-    this.employees.paginator = this.paginator;
-  }
-
   constructor(
     private employeeService: EmployeeService,
     private router: Router
@@ -30,11 +26,14 @@ export class EmployeeListComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllEmployees();
-
   }
 
   onEdit(id:string) {
-    this.router.navigate(['/employee', id]);
+    this.router.navigate(['/employee/' + id]);
+  }
+
+  onView(id:string) {
+    this.router.navigate(['/viewEmployee/' + id]);
   }
 
   onDelete(id:string) {
@@ -50,7 +49,8 @@ export class EmployeeListComponent implements OnInit{
 
   getAllEmployees(): void {
     this.employeeService.getAllEmployees().subscribe((response: any) => {
-          this.employees = response;
+      this.employees = new MatTableDataSource(response);
+      this.employees.paginator = this.paginator;
         },
         (error: any) => {
           this.errorMessage = error;

@@ -33,9 +33,9 @@ public class EmployeeControllerTest {
         List<Employee> mockEmployees = new ArrayList<>();
         mockEmployees.add(new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date()));
         mockEmployees.add(new Employee("2", "Shahin Alam", "Software", "Rangpur", "234534523", "shahin@example.com", new Date(), new Date()));
-        ResponseEntity<?> mockResponseEntity = new ResponseEntity<>(mockEmployees, HttpStatus.OK);
+        ResponseEntity<List<Employee>> mockResponseEntity = new ResponseEntity<>(mockEmployees, HttpStatus.OK);
 
-        when(employeeService.getAllEmployees()).thenReturn(any());
+        when(employeeService.getAllEmployees()).thenReturn(mockResponseEntity);
 
         ResponseEntity<?> responseEntity = employeeController.getAllEmployees();
 
@@ -46,10 +46,10 @@ public class EmployeeControllerTest {
     @Test
     public void getEmployeeById() {
         String id = "1";
-        Employee mockEmployee = new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
-        ResponseEntity<?> mockResponseEntity = new ResponseEntity<>(mockEmployee, HttpStatus.OK);
+        EmployeeDTO mockEmployee = new EmployeeDTO(id, "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
+        ResponseEntity<EmployeeDTO> mockResponseEntity = new ResponseEntity<>(mockEmployee, HttpStatus.OK);
 
-        when(employeeService.getEmployeeById(id)).thenReturn(any());
+        when(employeeService.getEmployeeById(id)).thenReturn(mockResponseEntity);
 
         ResponseEntity<?> responseEntity = employeeController.getEmployeeById(id);
 
@@ -60,9 +60,9 @@ public class EmployeeControllerTest {
     @Test
     public void createEmployee() {
         EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
-        ResponseEntity<?> mockResponseEntity = new ResponseEntity<>("Employee saved successfully", HttpStatus.CREATED);
+        ResponseEntity<String> mockResponseEntity = new ResponseEntity<>("Employee saved successfully", HttpStatus.CREATED);
 
-        when(employeeService.createEmployee(employeeDTO)).thenReturn(any());
+        when(employeeService.createEmployee(employeeDTO)).thenReturn(mockResponseEntity);
 
         ResponseEntity<?> responseEntity = employeeController.createEmployee(employeeDTO);
 
@@ -73,10 +73,10 @@ public class EmployeeControllerTest {
     @Test
     public void updateEmployee() {
         String id = "1";
-        EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
-        ResponseEntity<?> mockResponseEntity = new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id, "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
+        ResponseEntity<String> mockResponseEntity = new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
 
-        when(employeeService.updateEmployee(id, employeeDTO)).thenReturn(any());
+        when(employeeService.updateEmployee(id, employeeDTO)).thenReturn(mockResponseEntity);
 
         ResponseEntity<?> responseEntity = employeeController.updateEmployee(id, employeeDTO);
 
@@ -87,9 +87,9 @@ public class EmployeeControllerTest {
     @Test
     public void deleteEmployee() {
         String id = "1";
-        ResponseEntity<?> mockResponseEntity = new ResponseEntity<>("Employee deleted successfully", HttpStatus.NO_CONTENT);
+        ResponseEntity<String> mockResponseEntity = new ResponseEntity<>("Employee deleted successfully", HttpStatus.NO_CONTENT);
 
-        when(employeeService.deleteEmployee(id)).thenReturn(any());
+        when(employeeService.deleteEmployee(id)).thenReturn(mockResponseEntity);
 
         ResponseEntity<?> responseEntity = employeeController.deleteEmployee(id);
 

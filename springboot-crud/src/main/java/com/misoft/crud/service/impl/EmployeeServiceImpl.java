@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -27,19 +28,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<?> getAllEmployees() {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         try{
             List<Employee> employees = employeeRepository.findAll();
             log.info("Getting employee list");
+
+//            The commented code can be implemented if we convert to dto
+//            List<EmployeeDTO> employeeDTOs = employees.stream()
+//                    .map(employee -> employeeToDto(employee))
+//                    .collect(Collectors.toList());
+
             return new ResponseEntity<>(employees, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error occurred while getting employee list", e);
         }
-        return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
+
     @Override
-    public ResponseEntity<?> getEmployeeById(String id) {
+    public ResponseEntity<EmployeeDTO> getEmployeeById(String id) {
         try{
             log.info("Getting employee by employee id");
             Optional<Employee> employee = employeeRepository.findById(id);
@@ -48,11 +57,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (Exception e) {
             log.error("Error occurred while getting employee by id", e);
         }
-        return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new EmployeeDTO(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
-    public ResponseEntity<?> createEmployee(EmployeeDTO employeeDTO) {
+    public ResponseEntity<String> createEmployee(EmployeeDTO employeeDTO) {
         try{
             Employee employee = dtoToEmployee(employeeDTO);
             String id = UUID.randomUUID().toString();
@@ -68,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ResponseEntity<?> updateEmployee(String id, EmployeeDTO employeeDTO) {
+    public ResponseEntity<String> updateEmployee(String id, EmployeeDTO employeeDTO) {
         try{
             Employee employee = employeeRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
@@ -91,7 +100,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ResponseEntity<?> deleteEmployee(String id) {
+    public ResponseEntity<String> deleteEmployee(String id) {
         try{
             employeeRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));

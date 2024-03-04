@@ -12,7 +12,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 export class EmployeeComponent implements OnInit{
 
   employeeForm!: FormGroup;
-  employees!: any[];
+  employees!: Employee[];
   errorMessage!: string;
   update: boolean = false;
   id: any;
