@@ -32,7 +32,7 @@ public class EmployeeServiceImplTest {
     @Test
     public void getAllEmployees() {
         List<Employee> mockEmployees = new ArrayList<>();
-        mockEmployees.add(new Employee("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date()));
+        mockEmployees.add(new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date()));
         when(employeeRepository.findAll()).thenReturn(mockEmployees);
 
         ResponseEntity<?> response = employeeService.getAllEmployees();
@@ -44,8 +44,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void getEmployeeById() {
         String id = "1";
-        Employee mockEmployee = new Employee(id, "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
-        EmployeeDTO mockEmployeeDTO = new EmployeeDTO(id, "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        Employee mockEmployee = new Employee(id, "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
+        EmployeeDTO mockEmployeeDTO = new EmployeeDTO(id, "Shahin Alam", "Software", "Rangpur", "3643334676", "shahin@gmail.com", new Date(), new Date());
 
         when(employeeRepository.findById(id)).thenReturn(Optional.of(mockEmployee));
         when(employeeService.employeeToDto(mockEmployee)).thenReturn(mockEmployeeDTO);
@@ -58,7 +58,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void createEmployee() {
-        EmployeeDTO employeeDTO = new EmployeeDTO("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
         Employee employee = new Employee();
         when(modelMapper.map(any(), any())).thenReturn(employee);
 
@@ -70,8 +70,8 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void updateEmployee() {
-        EmployeeDTO employeeDTO = new EmployeeDTO("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
-        Employee employee = new Employee("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
+        Employee employee = new Employee("1", "Shahin Alam", "Software", "Rangpur", "3643334676", "shahin@gmail.com", new Date(), new Date());
         when(employeeRepository.findById("1")).thenReturn(Optional.of(employee));
 
         ResponseEntity<?> response = employeeService.updateEmployee("1", employeeDTO);
@@ -82,7 +82,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void deleteEmployee() {
-        Employee employee = new Employee("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        Employee employee = new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
         when(employeeRepository.findById("1")).thenReturn(Optional.of(employee));
 
         ResponseEntity<?> response = employeeService.deleteEmployee("1");

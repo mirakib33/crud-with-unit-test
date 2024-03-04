@@ -21,7 +21,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    // Get all employees
     @GetMapping
     public ResponseEntity<?> getAllEmployees() {
         try {
@@ -33,7 +32,6 @@ public class EmployeeController {
         return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Get employee by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable String id) {
         try {
@@ -45,7 +43,6 @@ public class EmployeeController {
         return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Create new employee
     @PostMapping
     public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
         try {
@@ -57,7 +54,6 @@ public class EmployeeController {
         return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Update employee
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEmployee(@PathVariable String id, @RequestBody EmployeeDTO employeeDTO) {
         try {
@@ -69,7 +65,6 @@ public class EmployeeController {
         return EmployeeUtils.getResponseEntity(EmployeeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Delete employee
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable String id) {
         try {

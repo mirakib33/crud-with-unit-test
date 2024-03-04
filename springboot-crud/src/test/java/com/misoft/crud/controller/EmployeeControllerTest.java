@@ -31,8 +31,8 @@ public class EmployeeControllerTest {
     @Test
     public void getAllEmployees() {
         List<Employee> mockEmployees = new ArrayList<>();
-        mockEmployees.add(new Employee("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date()));
-        mockEmployees.add(new Employee("2", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date()));
+        mockEmployees.add(new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date()));
+        mockEmployees.add(new Employee("2", "Shahin Alam", "Software", "Rangpur", "234534523", "shahin@example.com", new Date(), new Date()));
         ResponseEntity<?> mockResponseEntity = new ResponseEntity<>(mockEmployees, HttpStatus.OK);
 
         when(employeeService.getAllEmployees()).thenReturn(any());
@@ -46,7 +46,7 @@ public class EmployeeControllerTest {
     @Test
     public void getEmployeeById() {
         String id = "1";
-        Employee mockEmployee = new Employee("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        Employee mockEmployee = new Employee("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
         ResponseEntity<?> mockResponseEntity = new ResponseEntity<>(mockEmployee, HttpStatus.OK);
 
         when(employeeService.getEmployeeById(id)).thenReturn(any());
@@ -59,7 +59,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void createEmployee() {
-        EmployeeDTO employeeDTO = new EmployeeDTO("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
         ResponseEntity<?> mockResponseEntity = new ResponseEntity<>("Employee saved successfully", HttpStatus.CREATED);
 
         when(employeeService.createEmployee(employeeDTO)).thenReturn(any());
@@ -73,7 +73,7 @@ public class EmployeeControllerTest {
     @Test
     public void updateEmployee() {
         String id = "1";
-        EmployeeDTO employeeDTO = new EmployeeDTO("1", "John Doe", "IT", "New York", "123456789", "john@example.com", new Date(), new Date());
+        EmployeeDTO employeeDTO = new EmployeeDTO("1", "Mr Rakib", "IT", "Dhaka", "123456789", "rakib@gmail.com", new Date(), new Date());
         ResponseEntity<?> mockResponseEntity = new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
 
         when(employeeService.updateEmployee(id, employeeDTO)).thenReturn(any());
